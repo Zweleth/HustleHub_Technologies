@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+:root {
+    --txtColor: white;
+    --pink: pink;
+    --aqua: aqua;
+    --feint: #B08968;
+}
+
+*:not(i),
+::before:not(i),
+::after:not(i) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 255, 255, 0.5)),
+    url(https://i.postimg.cc/Dz6WjRNJ/wallpaperflare-com-wallpaper-2.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    place-items: center;
+    background-attachment: fixed;
+  }
+
+.aqua {
+   color: aqua;
+}
+
+.pink {
+    color: pink;
+}
+
