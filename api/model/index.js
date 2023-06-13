@@ -179,7 +179,7 @@ export class Site {
     // fetch Vehicle
     fetchSite(req, res){
         const qryStr = `
-        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design statuses.status_name, statuses.status_description
+        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design, statuses.status_name
         FROM sites
         LEFT JOIN statuses
         on sites.status_id = statuses.status_id
@@ -196,7 +196,7 @@ export class Site {
 
     fetchClientsSites(req, res){
         const qryStr = `
-        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design statuses.status_name, statuses.status_description
+        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design, statuses.status_name
         FROM sites
         LEFT JOIN statuses
         on sites.status_id = statuses.status_id
