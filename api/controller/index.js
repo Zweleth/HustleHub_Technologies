@@ -60,6 +60,10 @@ route.get('/site/:id', (req, res) => {
     site.fetchSite(req, res);
 })
 
+route.get('/sites/:id', (req, res) => {
+    site.fetchClientsSites(req, res);
+})
+
 // Add a new perfume
 route.post('/sites/:id', bodyParser.json(), (req, res)=> {
     site.createSite(req, res);

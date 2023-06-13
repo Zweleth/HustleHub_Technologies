@@ -194,6 +194,23 @@ export class Site {
         });
     }
 
+    fetchClientsSites(req, res){
+        const qryStr = `
+        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design statuses.status_name, statuses.status_description
+        FROM sites
+        LEFT JOIN statuses
+        on sites.status_id = statuses.status_id
+        WHERE sites.client_id = ?;
+        `;
+
+        db.query(qryStr, [req.params.id], (err, data) => {
+            if (err) throw err;
+            res.status(200).json({
+                results: data
+            });
+        });
+    }
+
     // create a Client
     async createSite(req, res) {
         // payload: data from the user
