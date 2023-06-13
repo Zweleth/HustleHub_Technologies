@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="build-text">
+  <div class="build-text" v-if="sites == null">
     <h5>Start building your site now</h5>
     <div class="word-scroll">
       <div class="left-word">
@@ -28,8 +28,12 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "buildscroll",
+  methods: {
+    ...mapGetters(["sites"])
+  }
 };
 </script>
 <style scoped>

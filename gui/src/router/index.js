@@ -64,7 +64,7 @@ const routes = [
     path: '/mysites',
     name: 'mysites',
     component: function () {
-      return import('../views/MySites.vue')
+      return import('../views/MySitesView.vue')
     }
   }
 ]

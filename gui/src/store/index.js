@@ -194,6 +194,20 @@ export default createStore({
       }
     },
 
+    async fetchClientsSites(context, id) {
+      try {
+        let res = await fetch(`${URL}sites/${id}`);
+        let data = await res.json();
+        console.log(data);
+        context.commit(
+          "setSites",
+          data.results.length !== 0 ? data.results : null
+        );
+      } catch (e) {
+        console.log(e);
+      }
+    },
+
     async deleteSite(context, id) {
       let res = await axios.delete(`${URL}site/${id}`);
       let { msg, err } = await res.data;
@@ -213,7 +227,7 @@ export default createStore({
         : context.commit("setMessage", err);
     },
 
-    async fetchPerfume(context, id) {
+    async fetchSite(context, id) {
       try {
         let res = await fetch(`${URL}site/${id}`);
         let data = await res.json();

@@ -1,6 +1,7 @@
 <template lang="">
   <div class="page" id="mysites">
     <buildScroll/>
+    <mySites/>
     <sidebar />
     <button
       class="btn btn-primary"
@@ -14,12 +15,14 @@
   </div>
 </template>
 <script>
+import mySites from '@/components/MySites.vue';
 import buildScroll from '@/components/BuildScroll.vue';
 import sidebar from '@/components/Sidebar.vue'
 export default {
   components: {
     sidebar,
-    buildScroll
+    buildScroll,
+    mySites
   }
 }
 </script>
