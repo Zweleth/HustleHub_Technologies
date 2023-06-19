@@ -22,8 +22,8 @@
       <div class="sidebar">
         <ul class="link_list">
           <li><router-link to="/mysites"><i class="fa-solid fa-globe"></i> My sites</router-link></li>
-          <li><router-link to="/myaccount"><i class="fa-solid fa-user"></i> My account</router-link></li>
-          <li><router-link to="/build-info"><i class="fa-solid fa-square-plus"></i> Create a site</router-link></li>
+          <li><router-link to="/myaccount" @click.prevent="setSite(null)"><i class="fa-solid fa-user"></i> My account</router-link></li>
+          <li><router-link to="/build-info" @click.prevent="setSite(null)"><i class="fa-solid fa-square-plus"></i> Create a site</router-link></li>
           <li><button></button></li>
         </ul>
       </div>
@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   name: "sidebar",
   computed: {
@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     ...mapActions(["signOut"]),
+    ...mapMutations(["setSite"]),
     toHome() {
       this.$router.push({ name: "home" });
     }
