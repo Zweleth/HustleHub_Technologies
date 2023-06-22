@@ -32,11 +32,12 @@
       
       <div class="s_icon">
         <i class="fa-solid fa-pen-ruler" v-if="site[0]?.status_id == 1"></i>
+        <i class="fa-solid fa-pencil" v-if="site[0]?.status_id == 2"></i>
       </div>
       <h6 class="s_description">{{site[0]?.status_description}}</h6>
       <div class="buttons">
-        <button class="btn btn-re" v-if="status_id == 1 || status_id == 6">Re-visit</button>
-        <button class="btn btn-apprv2" v-if="status_id == 1 || status_id == 6">Approve</button>
+        <button class="btn btn-re" v-if="site[0]?.status_id == 1 || site[0]?.status_id == 6" @click.prevent="statusUpdate1(site[0]?.site_id)">Re-visit</button>
+        <button class="btn btn-apprv2" v-if="site[0]?.status_id == 1 || site[0]?.status_id == 6" @click.prevent="statusUpdateSkip(site[0]?.site_id)">Approve</button>
         <!-- <button class="btn btn-apprv">Approve</button> -->
       </div>
     </div>
@@ -60,7 +61,7 @@ export default {
     ...mapGetters(["sites", "site"]),
   },
   methods: {
-    ...mapActions(["fetchClientsSites", "fetchSite"]),
+    ...mapActions(["fetchClientsSites", "fetchSite", "statusUpdate1", "statusUpdateSkip"]),
     ...mapMutations(["setSites"]),
     showMore(id) {
       this.fetchSite(id);

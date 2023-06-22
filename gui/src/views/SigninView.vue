@@ -72,11 +72,12 @@ export default {
    async signIn() {
       await
         this.$store.dispatch('signIn', this.payload);
-        this.$router.push({ name: "mysites" });
-        
-        if (this.loggedClient) {
-          this.loading = false;
+        if (this.loggedClient?.is_admin == 'false') {
+          this.$router.push({ name: "mysites" });
+        }else {
+          this.$router.push({ name: "admin" });
         }
+       
         
     },
     test() {
