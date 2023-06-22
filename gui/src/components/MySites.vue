@@ -34,6 +34,11 @@
         <i class="fa-solid fa-pen-ruler" v-if="site[0]?.status_id == 1"></i>
       </div>
       <h6 class="s_description">{{site[0]?.status_description}}</h6>
+      <div class="buttons">
+        <button class="btn btn-re" v-if="status_id == 1 || status_id == 6">Re-visit</button>
+        <button class="btn btn-apprv2" v-if="status_id == 1 || status_id == 6">Approve</button>
+        <!-- <button class="btn btn-apprv">Approve</button> -->
+      </div>
     </div>
   </div>
 </template>
@@ -182,5 +187,32 @@ export default {
 .s_description {
   margin-top: 3rem;
   font-size: large;
+}
+
+.buttons {
+  width: fit-content;
+  height: 2rem;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.buttons .btn {
+  padding: 0.2rem 0.4rem;
+  color: white;
+  padding: 0.2rem 0.4rem;
+}
+.buttons .btn-re {
+  background-color: rgba(0, 255, 255, 0.3);
+}
+
+.buttons .btn-apprv {
+  background-color: rgba(255, 192, 203, 0.5);
+}
+
+.buttons .btn-apprv2 {
+  background-color: rgba(255, 192, 203, 0.5);
 }
 </style>
