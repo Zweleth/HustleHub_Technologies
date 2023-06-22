@@ -74,6 +74,10 @@ route.put('/site/:id', bodyParser.json(), (req, res)=> {
     site.updateSite(req, res);
 })
 
+route.put('/status-updatemin/:id', (req, res)=> {
+    site.statusUpdateMin(req, res);
+})
+
 route.put('/status-update/:id', (req, res)=> {
     site.statusUpdate(req, res);
 })

@@ -262,6 +262,20 @@ export class Site {
         });
     }
 
+    statusUpdateMin(req, res) {
+        const qryStr = `
+            UPDATE sites
+            SET status_id = status_id - 1 
+            WHERE site_id = ?;`
+
+        db.query(qryStr, [req.params.id], (err) => {
+            if (err) throw err;
+            res.status(200).json({
+                msg: "Development status updated"
+            });
+        });
+    }
+
     statusUpdateSkip(req, res) {
         const qryStr = `
             UPDATE sites
