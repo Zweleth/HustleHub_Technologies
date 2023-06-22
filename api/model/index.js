@@ -161,10 +161,12 @@ export class Site {
     // fetch all Vehicles
     fetchSites(req, res){
         const qryStr = `
-        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design, statuses.status_id, statuses.status_name, statuses.status_description
+        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design, statuses.status_id, statuses.status_name, statuses.status_description, clients.first_name, clients.email_add
         FROM sites
         LEFT JOIN statuses
         on sites.status_id = statuses.status_id
+        LEFT JOIN clients
+        on sites.client_id = clients.client_id
         ;
         `;
 
@@ -179,10 +181,12 @@ export class Site {
     // fetch Vehicle
     fetchSite(req, res){
         const qryStr = `
-        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design, statuses.status_id, statuses.status_name, statuses.status_description
+        SELECT sites.site_id, sites.site_name, sites.site_description, sites.status_id, sites.client_id, sites.site_type, sites.design, statuses.status_id, statuses.status_name, statuses.status_description, clients.first_name, clients.email_add
         FROM sites
         LEFT JOIN statuses
         on sites.status_id = statuses.status_id
+        LEFT JOIN clients
+        on sites.client_id = clients.client_id
         WHERE sites.site_id = ?;
         `;
 
