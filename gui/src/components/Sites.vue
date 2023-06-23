@@ -15,9 +15,9 @@
       <h6 class="client_email">{{ site.email_add }}</h6>
       <h6 class="site_status">{{ site.status_name }} </h6>
       <button>
-        <i class="fa-solid fa-arrow-left" v-if="site.status_id == 4 || site.status_id == 7"></i>
+        <i class="fa-solid fa-arrow-left" @click.prevent="statusUpdateMin(site.site_id)" v-if="site.status_id == 4 || site.status_id == 7"></i>
       </button>
-      <button @click.prevent="statusUpdate1(site.site_id); getAllSites()" v-if="site.status_id != 3 && site?.status_id != 6">
+      <button @click.prevent="statusUpdate1(site.site_id, site.status_id); getAllSites()" v-if="site.status_id != 3 && site?.status_id != 6">
         <i class="fa-solid fa-arrow-right"></i>
       </button>
       
@@ -33,7 +33,7 @@ export default {
     ...mapGetters(["sites", "site"]),
   },
   methods: {
-    ...mapActions(["statusUpdate1"]),
+    ...mapActions(["statusUpdate1","statusUpdateMin"]),
     getAllSites() {
       this.$store.dispatch("fetchSites");
     },

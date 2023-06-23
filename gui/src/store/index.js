@@ -1,6 +1,6 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 import axios from "axios";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 const URL = "https://hustlehub.onrender.com/";
 
 export default createStore({
@@ -14,7 +14,47 @@ export default createStore({
     message: null,
     statuses: null,
     status: null,
-    OTP: null
+    OTP: null,
+    statusEmail : [
+      {
+        subject : "Development status update(Designing)",
+        message : "Our team is currently in the process of designing your website, and we are excited to present you with a range of ideas. Once we share the concepts, you will have the opportunity to select the one that resonates with you the most, and we will proceed accordingly."
+      },
+      {
+        subject : "Development status update(Design complete)",
+        message : "Our team has completed the design phase and we are ready to showcase the ideas to you. Before we proceed with development, we kindly request your feedback and approval. If you are not entirely satisfied with the current design, we would be more than happy to schedule a re-visit, allowing our team to make further improvements based on your input."
+      },
+      {
+        subject : "Development status update(Re-designing)",
+        message : "We are currently in the process of making some updates to the design. We understand the importance of aligning it with your vision and preferences. This stage will be iterative, with the opportunity to provide feedback and request revisions. Our aim is to continue refining the design until it fully meets your expectations and you are completely satisfied with the final result."
+      },
+      {
+        subject : "Development status update(Development)",
+        message : "Our team has commenced the development phase of your website, using the approved design as the foundation. We are working diligently to bring your vision to life, and you can expect a fully finished site in a short timeframe. Our experts are dedicated to delivering a high-quality result that aligns with your expectations, and we are excited to unveil the final product to you soon."
+      },
+      {
+        subject : "Development status update(Development complete)",
+        message : "We are delighted to inform you that your website is now complete and ready for your review. We encourage you to thoroughly test it and provide any feedback regarding necessary fixes or adjustments. If there are areas that require further attention, please request a re-visit, and our team will promptly address them. On the other hand, if you find the website to be perfect and meet your expectations, we can proceed with starting the trial phase."
+      },
+      {
+        subject : "Development status update(Re-development)",
+        message : "We are actively working on implementing the necessary fixes and updates to ensure that the website aligns perfectly with your preferences. Our team is dedicated to fine-tuning every aspect until the site is to your utmost satisfaction. Your feedback and input are invaluable to us during this process, and we will continue refining the site until it meets your exact liking and requirements."
+      },
+      {
+        subject : "Development status update(Live - 30 day trial)",
+        message : "We are excited to announce that your website has been successfully completed and is now live. As part of our commitment to ensuring your satisfaction, we offer you a 30-day trial period to experience the site in action and evaluate its impact on your business. This trial period provides you with an opportunity to fully assess its performance and benefits before making a purchase commitment. Once the 30-day trial period ends, to keep the site live and accessible, we kindly request that you proceed with purchasing the website."
+      },
+      {
+        subject : "Development status update(Paused - awaiting payment)",
+        message : "To ensure the continuity of our services and manage storage resources efficiently, we kindly request that you make the payment for your website. Until the payment is received, the site will remain temporarily closed. We understand that circumstances may change, so if you no longer wish to proceed, please let us know as soon as possible. However, in the absence of payment or communication regarding your intention, we may be required to proceed with permanently shutting down the site. Your prompt attention to this matter is greatly appreciated."
+      },
+      {
+        subject : "Development status update(Live)",
+        message : "Congratulations! Your website is now live and fully functional. We sincerely appreciate the opportunity to work with you throughout this process, and we are confident that your new website will serve as a valuable asset to your business. Thank you for entrusting us with your project, and we look forward to witnessing the positive impact it will have on your online presence and success."
+      }
+
+    ],
+    
   },
   getters: {
     sites(state) {
@@ -40,7 +80,7 @@ export default createStore({
     },
     OTP(state) {
       return state.OTP;
-    }
+    },
   },
   mutations: {
     setSites(state, sites) {
@@ -69,11 +109,10 @@ export default createStore({
     },
     setStatus(state, status) {
       state.status = status;
-    }
-    ,
+    },
     setOTP(state, OTP) {
       state.OTP = OTP;
-    }
+    },
   },
   actions: {
     async signIn(context, payload) {
@@ -83,15 +122,21 @@ export default createStore({
 
       if (result) {
         let value = {
-          status: true
-        }
-        sessionStorage.setItem("loggedClient", JSON.stringify(result))
+          status: true,
+        };
+        sessionStorage.setItem("loggedClient", JSON.stringify(result));
         // console.log('statement reached 1');
-        context.commit("setLoggedClient", JSON.parse(sessionStorage.getItem("loggedClient")));
+        context.commit(
+          "setLoggedClient",
+          JSON.parse(sessionStorage.getItem("loggedClient"))
+        );
         context.commit("setMessage", msg);
-        
-        sessionStorage.setItem("is_logged", JSON.stringify(value))
-        context.commit("setIs_Logged", JSON.parse(sessionStorage.getItem("is_logged")));
+
+        sessionStorage.setItem("is_logged", JSON.stringify(value));
+        context.commit(
+          "setIs_Logged",
+          JSON.parse(sessionStorage.getItem("is_logged"))
+        );
         // console.log(result.first_name);
       } else {
         context.commit("setMessage", err);
@@ -100,15 +145,15 @@ export default createStore({
     },
     async signOut(context, payload) {
       let value = {
-        status: false
-      }
-      sessionStorage.setItem("is_logged", JSON.stringify(value))
-      context.commit("setIs_Logged", JSON.parse(sessionStorage.getItem("is_logged")));
-      sessionStorage.setItem("loggedClient", null)
-      
-
-    }
-    ,
+        status: false,
+      };
+      sessionStorage.setItem("is_logged", JSON.stringify(value));
+      context.commit(
+        "setIs_Logged",
+        JSON.parse(sessionStorage.getItem("is_logged"))
+      );
+      sessionStorage.setItem("loggedClient", null);
+    },
     async signUp(context, payload) {
       let res = await axios.post(`${URL}register`, payload);
       let { result, msg, err } = await res.data;
@@ -119,7 +164,6 @@ export default createStore({
         context.commit("setMessage", err);
       }
     },
-    
 
     async updateClient(context, payload) {
       let res = await axios.put(`${URL}client/${payload.client_id}`, payload);
@@ -129,7 +173,7 @@ export default createStore({
         : context.commit("setMessage", err);
       context.dispatch("fetchClients");
     },
-    
+
     async deleteClient(context, id) {
       let res = await axios.delete(`${URL}client/${id}`);
       let { msg, err } = await res.data;
@@ -140,7 +184,6 @@ export default createStore({
         context.commit("setMessage", err);
       }
     },
-    
 
     async fetchClient(context, id) {
       try {
@@ -303,7 +346,17 @@ export default createStore({
         context.commit("setMessage", err);
       }
     },
-    
+    async statusUpdateMin(context, id) {
+      let res = await axios.put(`${URL}status-updatemin/${id}`);
+      let { msg, err } = await res.data;
+      if (msg) {
+        context.commit("setMessage", msg);
+        context.dispatch("fetchSites");
+        console.log(msg);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
 
     async statusUpdateSkip(context, id) {
       let res = await axios.put(`${URL}status-update2/${id}`);
@@ -322,6 +375,7 @@ export default createStore({
       let { msg, err } = await res.data;
       if (msg) {
         context.commit("setMessage", msg);
+        context.dispatch("fetchSites");
         console.log(msg);
       } else {
         context.commit("setMessage", err);
@@ -341,34 +395,24 @@ export default createStore({
     async sendOTP(context, payload) {
       let genOTP = 100000;
       while (genOTP > 99999) {
-        genOTP = Math.floor((Math.random() * 99999) + 10000);
+        genOTP = Math.floor(Math.random() * 99999 + 10000);
       }
-      context.commit("setOTP", genOTP)
+      context.commit("setOTP", genOTP);
       var params = {
         first_name: payload.first_name,
         email_add: payload.email_add,
-        message: `This is your OTP ${genOTP} valid for only 5mins from now, please verify your account`
+        message: `This is your OTP ${genOTP} valid for only 5mins from now, please verify your account`,
       };
       const siD = "service_qm84rjv";
       const tID = "template_g1bcgup";
-      const pKey = "9CG72XgSLO1Y_FoRs"
-      console.log(params)
-      emailjs.send(siD,tID, params, pKey)
+      const pKey = "9CG72XgSLO1Y_FoRs";
+      console.log(params);
+      emailjs.send(siD, tID, params, pKey);
       // .then((response) => {
       //    console.log('SUCCESS!', response.status, response.text);
       // }, (err) => {
       //    console.log('FAILED...', err);
       // });
-    }
-
-
-
-
-
-
-
-  }
-}
-  
-)
-
+    },
+  },
+});

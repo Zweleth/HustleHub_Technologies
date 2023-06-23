@@ -21,10 +21,12 @@
       </div>
       <div class="sidebar">
         <ul class="link_list">
-          <li><router-link to="/mysites"><i class="fa-solid fa-globe"></i> My sites</router-link></li>
-          <li><router-link to="/myaccount" @click.prevent="setSite(null)"><i class="fa-solid fa-user"></i> My account</router-link></li>
-          <li><router-link to="/build-info" @click.prevent="setSite(null)"><i class="fa-solid fa-square-plus"></i> Create a site</router-link></li>
-          <li><button></button></li>
+          <li v-if="this.loggedClient?.is_admin == 'true'"><router-link to="/allsites"><i class="fa-solid fa-globe" ></i> Sites</router-link></li>
+          <li v-if="this.loggedClient?.is_admin == 'true'"><router-link to="/clients"><i class="fa-solid fa-users" ></i> Clients</router-link></li>
+          <li v-if="this.loggedClient?.is_admin == 'false'"><router-link to="/mysites"><i class="fa-solid fa-globe"></i> My sites</router-link></li>
+          <li v-if="this.loggedClient?.is_admin == 'false'"><router-link to="/myaccount" @click.prevent="setSite(null)"><i class="fa-solid fa-user"></i> My account</router-link></li>
+          <li v-if="this.loggedClient?.is_admin == 'false'"><router-link to="/build-info" @click.prevent="setSite(null)"><i class="fa-solid fa-square-plus"></i> Create a site</router-link></li>
+          <li v-if="this.loggedClient?.is_admin == 'false'"><button></button></li>
         </ul>
       </div>
       <div class="logout">
@@ -50,6 +52,9 @@ export default {
         JSON.parse(sessionStorage.getItem("loggedClient")).first_name
       } ${JSON.parse(sessionStorage.getItem("loggedClient")).last_name}`;
     },
+    loggedClient() {
+      return JSON.parse(sessionStorage.getItem("loggedClient"));
+    }
   },
   methods: {
     ...mapActions(["signOut"]),
