@@ -295,4 +295,16 @@ form button {
     transform: rotate(1turn);
   }
 }
+
+@media screen and (max-width: 480px) {
+  .signup-text {
+    display: none;
+  }
+  .signup-form {
+    width: 100vw;
+  }
+  .signup-text {
+    width: 100%;
+  }
+}
 </style>

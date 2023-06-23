@@ -1,13 +1,16 @@
 <template>
   <navbar/>
   <router-view/>
+  <mobile_nav/>
 </template>
 <script>
 import navbar from '@/components/Navbar.vue'
+import mobile_nav from '@/components/MobileNav.vue'
 
 export default {
   components: {
-    navbar
+    navbar,
+    mobile_nav
   }
 }
 </script>

@@ -213,4 +213,16 @@ form button {
   transform: rotate(1turn);
  }
 }
+
+@media screen and (max-width: 480px) {
+  .signin-text {
+    display: none;
+  }
+  .signin-form {
+    width: 100vw;
+  }
+  form {
+    width: 100%;
+  }
+}
 </style>

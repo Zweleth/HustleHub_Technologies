@@ -36,8 +36,8 @@
       </div>
       <h6 class="s_description">{{site[0]?.status_description}}</h6>
       <div class="buttons">
-        <button class="btn btn-re" v-if="site[0]?.status_id == 3 || site[0]?.status_id == 6" @click.prevent="statusUpdate1(site[0]?.site_id)">Re-visit</button>
-        <button class="btn btn-apprv2" v-if="site[0]?.status_id == 3 || site[0]?.status_id == 6" @click.prevent="statusUpdateSkip(site[0]?.site_id)">Approve</button>
+        <button class="btn btn-re" v-if="site[0]?.status_id == 3 || site[0]?.status_id == 6" @click.prevent="statusUpdate1(site[0]?.site_id); fetchSite(site[0]?.site_id)">Re-visit</button>
+        <button class="btn btn-apprv2" v-if="site[0]?.status_id == 3 || site[0]?.status_id == 6" @click.prevent="statusUpdateSkip(site[0]?.site_id); sendStatusEmailSkip(site); fetchSite(site[0]?.site_id)">Approve</button>
         <!-- <button class="btn btn-apprv">Approve</button> -->
       </div>
     </div>
@@ -61,7 +61,7 @@ export default {
     ...mapGetters(["sites", "site"]),
   },
   methods: {
-    ...mapActions(["fetchClientsSites", "fetchSite", "statusUpdate1", "statusUpdateSkip"]),
+    ...mapActions(["fetchClientsSites", "fetchSite", "statusUpdate1", "statusUpdateSkip","sendStatusEmailSkip"]),
     ...mapMutations(["setSites"]),
     showMore(id) {
       this.fetchSite(id);
@@ -215,5 +215,40 @@ export default {
 
 .buttons .btn-apprv2 {
   background-color: rgba(255, 192, 203, 0.5);
+}
+
+@media screen and (max-width: 480px) {
+  .mysites {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site {
+    width: 100%;
+  }
+
+  .icon {
+    width: 6rem;
+  }
+  .icon i {
+  scale: 3;
+}
+.status {
+  font-size: small;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+}
+.info h6 {
+  font-size: small;
+}
+
+.info .name {
+  font-size: medium;
+} 
+.info button {
+  font-size: small;
+  bottom: 0.2rem;
+  right: 0.2rem;
+}
 }
 </style>

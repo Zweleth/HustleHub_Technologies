@@ -14,7 +14,7 @@
     <router-link to="/build" class="btn-close"></router-link>
     <form @submit.prevent="createSite()">
       <div class="first-row">
-        <div class="site-info">
+        <div class="site-info" v-if="this.show.site_details">
           <h6>Site details</h6>
           <div class="inp1">
             <label for="exampleFormControlInput1" class="form-label"
@@ -26,6 +26,7 @@
               id="exampleFormControlInput1"
               placeholder=""
               required
+              v-model="payload.site_name"
             />
           </div>
           <label for="exampleDataList" class="form-label">Website type</label>
@@ -35,6 +36,7 @@
             id="exampleDataList"
             placeholder="Type to search..."
             required
+            v-model="payload.site_type"
           />
           <datalist id="datalistOptions">
             <option value="E-commerce"></option>
@@ -43,7 +45,7 @@
             <option value="Membership"></option>
             <option value="Business"></option>
           </datalist>
-          <button class="btn-next" @click.prevent="showLogo()">Next</button>
+          <button class="btn-next" @click.prevent="showLogo(); hideDetails()">Next</button>
         </div>
         <div class="logo" v-if="this.show.site_logo">
           <h6>Logo</h6>
@@ -51,7 +53,7 @@
             <label for="formFile" class="form-label">Website logo</label>
             <input class="form-control" type="file" id="formFile" />
           </div>
-          <button class="btn-next" @click.prevent="showExtra()">Next</button>
+          <button class="btn-next" @click.prevent="showExtra(); hideLogo()">Next</button>
         </div>
       </div>
       <div class="second-row">
@@ -64,6 +66,7 @@
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="2"
+              v-model="payload.site_description"
             ></textarea>
           </div>
           <div>
@@ -77,7 +80,7 @@
             ></textarea>
           </div>
 
-          <button class="btn-next" @click.prevent="showColors()">Next</button>
+          <button class="btn-next" @click.prevent="showColors(); hideExtra()">Next</button>
         </div>
         <div class="colors" v-if="this.show.colors">
           <label for="exampleColorInput" class="form-label"
@@ -110,7 +113,7 @@
             value="#808080"
             title="Choose your color"
           />
-          <button class="btn-start">Start build</button>
+          <button class="btn-start" @click.prevent="createSite(this.payload)">Start build</button>
         </div>
       </div>
     </form>
@@ -123,6 +126,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 import sidebar from '@/components/Sidebar.vue'
 export default {
   components: {
@@ -151,8 +155,22 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["createSite"]),
     showLogo() {
       this.show.site_logo = true;
+    },
+    hideDetails() {
+      this.show.site_details = false
+    }
+    ,
+    hideLogo() {
+      this.show.site_logo = false
+    },
+    hideExtra() {
+      this.show.extra_info = false
+    },
+    hideColors() {
+      this.show.colors = false
     },
     showExtra() {
       this.show.extra_info = true;
@@ -304,5 +322,38 @@ form button {
   border: none;
   scale: 1.5;
   z-index: 8;
+}
+
+@media screen and (max-width: 480px) {
+  .first-row {
+    flex-direction: column;
+  }
+  .second-row {
+    flex-direction: column;
+  }
+  .site-info > h6, .logo > h6, .extra-info > h6, .colors > h6 {
+    display: none;
+  }
+  .site-info, .logo, .extra-info, .colors {
+    width: 100%;
+    font-size: small;
+    height: fit-content;
+    padding-bottom: 3rem;
+  }
+  form input {
+    font-size: small;
+  }
+  .site-info input, label {
+    margin: 0;
+  }
+  .form-label {
+    margin-top: 1rem;
+  }
+
+  .btn-next {
+    font-size: small;
+    bottom: 0.2rem;
+    right: 0.2rem;
+  }
 }
 </style>

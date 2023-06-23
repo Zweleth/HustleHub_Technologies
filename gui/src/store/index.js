@@ -9,7 +9,7 @@ export default createStore({
     site: null,
     clients: null,
     client: null,
-    loggedClient: null,
+    loggedClient: JSON.parse(sessionStorage.getItem("loggedClient")),
     is_logged: JSON.parse(sessionStorage.getItem("is_logged")),
     message: null,
     statuses: null,
@@ -218,8 +218,10 @@ export default createStore({
       if (result) {
         context.commit("setSite", result);
         context.commit("setMessage", msg);
+        alert(msg)
       } else {
         context.commit("setMessage", err);
+        alert(msg)
       }
     },
 
@@ -377,6 +379,7 @@ export default createStore({
         context.commit("setMessage", msg);
         context.dispatch("fetchSites");
         console.log(msg);
+        console.log(id)
       } else {
         context.commit("setMessage", err);
       }
@@ -407,6 +410,66 @@ export default createStore({
       const tID = "template_g1bcgup";
       const pKey = "9CG72XgSLO1Y_FoRs";
       console.log(params);
+      emailjs.send(siD, tID, params, pKey);
+      // .then((response) => {
+      //    console.log('SUCCESS!', response.status, response.text);
+      // }, (err) => {
+      //    console.log('FAILED...', err);
+      // });
+    },
+
+    async sendStatusEmailSkip(context, payload) {
+      
+      var params = {
+        first_name: payload[0]?.first_name,
+        email_add: payload[0]?.email_add,
+        site_name: payload[0]?.site_name,
+        subject: this.state.statusEmail[payload[0]?.status_id].subject,
+        message: this.state.statusEmail[payload[0]?.status_id].message
+      };
+      const siD = "service_qm84rjv";
+      const tID = "template_1be2mat";
+      const pKey = "9CG72XgSLO1Y_FoRs";
+      emailjs.send(siD, tID, params, pKey);
+      // .then((response) => {
+      //    console.log('SUCCESS!', response.status, response.text);
+      // }, (err) => {
+      //    console.log('FAILED...', err);
+      // });
+    },
+
+    async sendStatusEmail(context, payload) {
+      
+      var params = {
+        first_name: payload.first_name,
+        email_add: payload.email_add,
+        site_name: payload.site_name,
+        subject: this.state.statusEmail[payload.status_id-1].subject,
+        message: this.state.statusEmail[payload.status_id-1].message
+      };
+      const siD = "service_qm84rjv";
+      const tID = "template_1be2mat";
+      const pKey = "9CG72XgSLO1Y_FoRs";
+      emailjs.send(siD, tID, params, pKey);
+      // .then((response) => {
+      //    console.log('SUCCESS!', response.status, response.text);
+      // }, (err) => {
+      //    console.log('FAILED...', err);
+      // });
+    },
+
+    async sendStatusEmailRev(context, payload) {
+      
+      var params = {
+        first_name: payload.first_name,
+        email_add: payload.email_add,
+        site_name: payload.site_name,
+        subject: this.state.statusEmail[payload.status_id-3].subject,
+        message: this.state.statusEmail[payload.status_id-3].message
+      };
+      const siD = "service_qm84rjv";
+      const tID = "template_1be2mat";
+      const pKey = "9CG72XgSLO1Y_FoRs";
       emailjs.send(siD, tID, params, pKey);
       // .then((response) => {
       //    console.log('SUCCESS!', response.status, response.text);
