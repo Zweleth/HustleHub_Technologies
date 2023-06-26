@@ -4,7 +4,7 @@
     <div class="site" v-for="site in sites" :key="site">
       <i
         class="fa-solid fa-shop icons"
-        v-if="site.site_type == 'e-commerce'"
+        v-if="site.site_type == 'e-commerce' || site.site_type == 'E-commerce'"
       ></i>
       <i
         class="fa-solid fa-briefcase icons"

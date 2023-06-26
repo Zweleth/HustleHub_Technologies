@@ -33,7 +33,7 @@
           <div class="icon">
             <i
               class="fa-solid fa-shop"
-              v-if="site.site_type == 'e-commerce'"
+              v-if="site.site_type == 'e-commerce' || site.site_type == 'E-commerce'"
             ></i>
             <i
               class="fa-solid fa-briefcase"

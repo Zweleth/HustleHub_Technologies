@@ -2,7 +2,7 @@
   <div class="mysites" v-if="sites && show_site == false">
     <div class="site" v-for="site in sites" :key="site">
       <div class="icon">
-        <i class="fa-solid fa-shop" v-if="site.site_type == 'e-commerce'"></i>
+        <i class="fa-solid fa-shop" v-if="site.site_type == 'e-commerce' || site.site_type == 'E-commerce'"></i>
         <i
           class="fa-solid fa-briefcase"
           v-if="site.site_type == 'Business'"
