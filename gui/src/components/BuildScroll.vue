@@ -1,6 +1,6 @@
 <template lang="">
-  <div class="build-text" v-if="sites == null">
-    <h5>Start building your site now</h5>
+  <div class="build-text">
+    <h5>Host your hustle</h5>
     <div class="word-scroll">
       <div class="left-word">
         <div class="left-scroll">
@@ -22,8 +22,8 @@
         </div>
       </div>
     </div>
-    <router-link to="/build-info"
-      ><button class="btn-startbuild">Build my site</button></router-link
+    <router-link to="/signin"
+      ><button class="btn-startbuild">Build</button></router-link
     >
   </div>
 </template>
@@ -39,6 +39,8 @@ export default {
 <style scoped>
 .build-text {
   display: flex;
+  align-self: center;
+  justify-self: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -56,16 +58,20 @@ export default {
 }
 .left-word {
   position: relative;
-  height: 6rem;
+  height: 5rem;
   color: aqua;
 }
 
 .right-word {
   color: pink;
 }
+a {
+  margin-bottom: 3rem;
+  margin-top: 0;
+}
 .left-scroll {
   text-align: right;
-  animation: scroll 6s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+  animation: scroll 12s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
   animation-delay: 10s;
 }
 
@@ -79,37 +85,156 @@ button {
   color: white;
   padding: 0 1rem;
 }
+
+.btn-startbuild {
+  background: none;
+  color: var(--txtColor);
+  border: 0.15rem solid var(--txtColor);
+  margin-top: 1rem;
+  font-size: xx-large;
+  border-radius: 2rem;
+  margin: 2rem;
+}
+
+.btn-startbuild:hover {
+  animation: glitch 0.4s linear forwards;
+}
+
 @keyframes scroll {
   0% {
     transform: translateY();
   }
-  5% {
+  2% {
     transform: translateY();
   }
-  25% {
+  10% {
     transform: translateY(-48rem);
+  }
+  12% {
+    transform: translateY(-48rem);
+  }
+  20% {
+    transform: translateY(-6rem);
+  }
+  22% {
+    transform: translateY(-6rem);
   }
   30% {
-    transform: translateY(-48rem);
-  }
-  50% {
-    transform: translateY(-6rem);
-  }
-  55% {
-    transform: translateY(-6rem);
-  }
-  65% {
     transform: translateY(-30rem);
   }
 
-  70% {
+  32% {
     transform: translateY(-30rem);
   }
-  90% {
+  40% {
+    transform: translateY(0.001rem);
+  }
+  42% {
     transform: translateY();
+  }
+  
+}
+
+@keyframes glitch {
+  0% {
+    border-color: var(--txtColor);
+    color: var(--txtColor);
+    transform: translateX() translateY();
+  }
+  9% {
+    border-color: var(--txtColor);
+    color: var(--txtColor);
+    transform: translateX() translateY();
+  }
+  10% {
+    border-color: var(--aqua);
+    color: var(--aqua);
+    transform: translateX(-0.5rem) translateY(0.5rem);
+  }
+  19% {
+    border-color: var(--aqua);
+    color: var(--aqua);
+    transform: translateX(-0.5rem) translateY(0.5rem);
+  }
+  20% {
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: translateX(0.5rem) translateY(-0.5rem);
+  }
+  29% {
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: translateX(0.5rem) translateY(-0.5rem);
+  }
+  30% {
+    border-color: var(--aqua);
+    color: var(--aqua);
+    transform: translateX(0.5rem) translateY(0.5rem);
+  }
+  39% {
+    border-color: var(--aqua);
+    color: var(--aqua);
+    transform: translateX(0.5rem) translateY(0.5rem);
+  }
+  40% {
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: translateX(0.5rem) translateY(-0.5rem);
+  }
+  49% {
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: translateX(0.5rem) translateY(-0.5rem);
+  }
+  50% {
+    border-color: var(--txtColor);
+    color: var(--txtColor);
+    transform: translateX() translateY();
+  }
+  59% {
+    border-color: var(--txtColor);
+    color: var(--txtColor);
+    transform: translateX() translateY();
+  }
+  60% {
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: translateX(0.5rem) translateY(-0.5rem);
+  }
+  69% {
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: translateX(0.5rem) translateY(-0.5rem);
+  }
+  70% {
+    border-color: var(--txtColor);
+    color: var(--txtColor);
+    transform: translateX() translateY();
+  }
+  79% {
+    border-color: var(--txtColor);
+    color: var(--txtColor);
+    transform: translateX() translateY();
+  }
+  80% {
+    border-color: var(--aqua);
+    color: var(--aqua);
+    transform: translateX(-0.5rem) translateY(0.5rem);
+  }
+  99% {
+    border-color: var(--aqua);
+    color: var(--aqua);
+    transform: translateX(-0.5rem) translateY(0.5rem);
   }
   100% {
-    transform: translateY();
+    border-color: var(--txtColor);
+    color: var(--txtColor);
+    transform: translateX() translateY();
   }
+
+
+  
 }
+
+
 </style>

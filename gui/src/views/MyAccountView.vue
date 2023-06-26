@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import buildScroll from '@/components/BuildScroll.vue';
+
 import sidebar from '@/components/Sidebar.vue'
 import { mapActions } from "vuex";
 export default {

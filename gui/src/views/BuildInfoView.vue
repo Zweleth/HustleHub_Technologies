@@ -45,7 +45,15 @@
             <option value="Membership"></option>
             <option value="Business"></option>
           </datalist>
-          <button class="btn-next" @click.prevent="showLogo(); hideDetails()">Next</button>
+          <button
+            class="btn-next"
+            @click.prevent="
+              showLogo();
+              hideDetails();
+            "
+          >
+            Next
+          </button>
         </div>
         <div class="logo" v-if="this.show.site_logo">
           <h6>Logo</h6>
@@ -53,7 +61,15 @@
             <label for="formFile" class="form-label">Website logo</label>
             <input class="form-control" type="file" id="formFile" />
           </div>
-          <button class="btn-next" @click.prevent="showExtra(); hideLogo()">Next</button>
+          <button
+            class="btn-next"
+            @click.prevent="
+              showExtra();
+              hideLogo();
+            "
+          >
+            Next
+          </button>
         </div>
       </div>
       <div class="second-row">
@@ -80,7 +96,15 @@
             ></textarea>
           </div>
 
-          <button class="btn-next" @click.prevent="showColors(); hideExtra()">Next</button>
+          <button
+            class="btn-next"
+            @click.prevent="
+              showColors();
+              hideExtra();
+            "
+          >
+            Next
+          </button>
         </div>
         <div class="colors" v-if="this.show.colors">
           <label for="exampleColorInput" class="form-label"
@@ -113,7 +137,9 @@
             value="#808080"
             title="Choose your color"
           />
-          <button class="btn-start" @click.prevent="createSite(this.payload)">Start build</button>
+          <button class="btn-start" @click.prevent="createSite(this.payload)">
+            Start build
+          </button>
         </div>
       </div>
     </form>
@@ -127,10 +153,10 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import sidebar from '@/components/Sidebar.vue'
+import sidebar from "@/components/Sidebar.vue";
 export default {
   components: {
-    sidebar
+    sidebar,
   },
   data() {
     return {
@@ -160,17 +186,24 @@ export default {
       this.show.site_logo = true;
     },
     hideDetails() {
-      this.show.site_details = false
-    }
-    ,
+      if (window.innerWidth < 540) {
+        this.show.site_details = false;
+      }
+    },
     hideLogo() {
-      this.show.site_logo = false
+      if (window.innerWidth < 540) {
+        this.show.site_logo = false;
+      }
     },
     hideExtra() {
-      this.show.extra_info = false
+      if (window.innerWidth < 540) {
+        this.show.extra_info = false;
+      }
     },
     hideColors() {
-      this.show.colors = false
+      if (window.innerWidth < 540) {
+        this.show.colors = false;
+      }
     },
     showExtra() {
       this.show.extra_info = true;
@@ -235,7 +268,7 @@ form button {
   margin-top: 1rem;
   color: white;
   padding: 0 1rem;
-} 
+}
 
 .cancel {
   text-decoration: none;
@@ -314,7 +347,8 @@ form button {
   color: white;
 }
 
-.btn, .btn:active {
+.btn,
+.btn:active {
   position: absolute;
   top: 1rem;
   left: 0.5rem;
@@ -331,10 +365,16 @@ form button {
   .second-row {
     flex-direction: column;
   }
-  .site-info > h6, .logo > h6, .extra-info > h6, .colors > h6 {
+  .site-info > h6,
+  .logo > h6,
+  .extra-info > h6,
+  .colors > h6 {
     display: none;
   }
-  .site-info, .logo, .extra-info, .colors {
+  .site-info,
+  .logo,
+  .extra-info,
+  .colors {
     width: 100%;
     font-size: small;
     height: fit-content;
@@ -343,7 +383,8 @@ form button {
   form input {
     font-size: small;
   }
-  .site-info input, label {
+  .site-info input,
+  label {
     margin: 0;
   }
   .form-label {

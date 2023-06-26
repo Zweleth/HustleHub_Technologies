@@ -218,11 +218,11 @@ export default createStore({
       if (result) {
         context.commit("setSite", result);
         context.commit("setMessage", msg);
-        alert(msg)
       } else {
         context.commit("setMessage", err);
-        alert(msg)
+      
       }
+      context.dispatch("sendSiteCreated",)
     },
 
     async fetchSites(context) {
@@ -466,6 +466,25 @@ export default createStore({
         site_name: payload.site_name,
         subject: this.state.statusEmail[payload.status_id-3].subject,
         message: this.state.statusEmail[payload.status_id-3].message
+      };
+      const siD = "service_qm84rjv";
+      const tID = "template_1be2mat";
+      const pKey = "9CG72XgSLO1Y_FoRs";
+      emailjs.send(siD, tID, params, pKey);
+      // .then((response) => {
+      //    console.log('SUCCESS!', response.status, response.text);
+      // }, (err) => {
+      //    console.log('FAILED...', err);
+      // });
+    },
+
+    async sendSiteCreated(context, payload) {
+      
+      var params = {
+        first_name: this.state.loggedClient.first_name,
+        email_add: this.state.loggedClient.email_add,
+        subject: "Website created",
+        message: `Congratulations on taking the first step towards creating your website and building a better online presence, the team is preparing for your site's development. We are assembling the team and tools that are required for your site's development and we 33will be starting on the designs in a short while`
       };
       const siD = "service_qm84rjv";
       const tID = "template_1be2mat";

@@ -1,6 +1,6 @@
 <template lang="">
   <div class="page" id="build">
-    <buildScroll/>
+
     <!-- <div class="build-text">
       <h5>Start building your site now</h5>
       <div class="word-scroll">
@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-import buildScroll from '@/components/BuildScroll.vue'
+
 export default {
   components: {
     buildScroll

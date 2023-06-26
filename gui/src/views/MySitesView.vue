@@ -1,6 +1,5 @@
 <template lang="">
   <div class="page" id="mysites">
-    <buildScroll/>
     <mySites/>
     <sidebar />
     <button
