@@ -15,10 +15,10 @@
     <form @submit.prevent="createSite()">
       <div class="first-row">
         <div class="site-info" v-if="this.show.site_details">
-          <h6>Site details</h6>
+          <h6>Site details <span class="req_text"><span class="blue_star">*</span> represents required fields</span></h6>
           <div class="inp1">
             <label for="exampleFormControlInput1" class="form-label"
-              >Website name</label
+              >Website name<span class="blue_star">*</span></label
             >
             <input
               type="text"
@@ -29,7 +29,7 @@
               v-model="payload.site_name"
             />
           </div>
-          <label for="exampleDataList" class="form-label">Website type</label>
+          <label for="exampleDataList" class="form-label">Website type<span class="blue_star">*</span></label>
           <input
             class="form-control inp2"
             list="datalistOptions"
@@ -76,7 +76,7 @@
         <div class="extra-info" v-if="this.show.extra_info">
           <div>
             <label for="exampleFormControlTextarea1" class="form-label"
-              >Website description</label
+              >Website description<span class="blue_star">*</span></label
             >
             <textarea
               class="form-control"
@@ -357,6 +357,13 @@ form button {
   scale: 1.5;
   z-index: 8;
 }
+.req_text {
+    font-size: large;
+  }
+
+  .blue_star {
+    color: aqua;
+  }
 
 @media screen and (max-width: 480px) {
   .first-row {
@@ -396,5 +403,6 @@ form button {
     bottom: 0.2rem;
     right: 0.2rem;
   }
+  
 }
 </style>

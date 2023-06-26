@@ -42,6 +42,12 @@
       </div>
     </div>
   </div>
+  <div class="no_sites" v-if="!sites && !site">
+    <div class="no_msg">
+      <h3>You haven't created a site yet</h3>
+      <router-link to="/build-info">Create site</router-link>
+    </div>
+  </div>
 </template>
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
@@ -216,6 +222,14 @@ export default {
 .buttons .btn-apprv2 {
   background-color: rgba(255, 192, 203, 0.5);
 }
+.no_msg {
+  color: white;
+}
+
+.no_msg a {
+  text-decoration: none;
+  color: white;
+}
 
 @media screen and (max-width: 480px) {
   .mysites {
@@ -250,5 +264,6 @@ export default {
   bottom: 0.2rem;
   right: 0.2rem;
 }
+
 }
 </style>

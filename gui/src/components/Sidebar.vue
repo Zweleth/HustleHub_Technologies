@@ -24,9 +24,8 @@
           <li v-if="this.loggedClient?.is_admin == 'true'"><router-link to="/allsites"><i class="fa-solid fa-globe" ></i> Sites</router-link></li>
           <li v-if="this.loggedClient?.is_admin == 'true'"><router-link to="/clients"><i class="fa-solid fa-users" ></i> Clients</router-link></li>
           <li v-if="this.loggedClient?.is_admin == 'false'"><router-link to="/mysites"><i class="fa-solid fa-globe"></i> My sites</router-link></li>
-          <li v-if="this.loggedClient?.is_admin == 'false'"><router-link to="/myaccount" @click.prevent="setSite(null)"><i class="fa-solid fa-user"></i> My account</router-link></li>
-          <li v-if="this.loggedClient?.is_admin == 'false'"><router-link to="/build-info" @click.prevent="setSite(null)"><i class="fa-solid fa-square-plus"></i> Create a site</router-link></li>
-          <li v-if="this.loggedClient?.is_admin == 'false'"><button></button></li>
+          <li v-if="this.loggedClient?.is_admin == 'false'"><router-link to="/account" @click.prevent="setSite(null)"><i class="fa-solid fa-user"></i> My account</router-link></li>
+          <li v-if="this.loggedClient?.is_admin == 'false' && sites == null"><router-link to="/build-info" @click.prevent="setSite(null)"><i class="fa-solid fa-square-plus"></i> Create a site</router-link></li>
         </ul>
       </div>
       <div class="logout">
@@ -43,7 +42,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapGetters } from "vuex";
 export default {
   name: "sidebar",
   computed: {
@@ -54,14 +53,18 @@ export default {
     },
     loggedClient() {
       return JSON.parse(sessionStorage.getItem("loggedClient"));
-    }
+    },
+    ...mapGetters(["sites"])
   },
   methods: {
-    ...mapActions(["signOut"]),
+    ...mapActions(["signOut","fetchClientsSites"]),
     ...mapMutations(["setSite"]),
     toHome() {
       this.$router.push({ name: "home" });
     }
+  },
+  created() {
+    this.fetchClientsSites(JSON.parse(sessionStorage.getItem("loggedClient"))?.client_id);
   }
 };
 </script>

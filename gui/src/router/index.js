@@ -68,6 +68,13 @@ const routes = [
     }
   },
   {
+    path: '/account',
+    name: 'account',
+    component: function () {
+      return import('../views/ClientView.vue')
+    }
+  },
+  {
     path: '/admin',
     name: 'admin',
     component: function () {
